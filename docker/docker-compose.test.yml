@@ -1,0 +1,17 @@
+version: '3.8'
+
+# Override configuration for testing with local API
+# The EntitiesManager API should be running locally at http://localhost:5130
+services:
+  mongodb:
+    environment:
+      MONGO_INITDB_DATABASE: EntitiesManagerTestDb
+
+  # Note: API runs locally, not in container
+  # Start the API locally with:
+  # cd ../
+  # dotnet run --project src/Presentation/FlowOrchestrator.EntitiesManagers.Api/
+  #
+  # The API will be available at:
+  # - Development: http://localhost:5130
+  # - Production: http://localhost:5000

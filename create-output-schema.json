@@ -1,0 +1,6 @@
+{
+  "version": "1.0",
+  "name": "MyOutputSchema",
+  "description": "Output schema for custom processor",
+  "definition": "{\"type\":\"object\",\"properties\":{\"result\":{\"type\":\"string\"},\"timestamp\":{\"type\":\"string\",\"format\":\"date-time\"},\"status\":{\"type\":\"string\",\"enum\":[\"completed\",\"failed\",\"processing\"]},\"data\":{\"type\":\"object\"}},\"required\":[\"result\",\"status\"]}"
+}

@@ -1,0 +1,19 @@
+{
+  "processorId": "b424a09d-196c-4b37-a2dd-b63fc0b7796c",
+  "stepId": "test-step-001",
+  "executionId": "12345678-1234-5678-9abc-123456789012",
+  "correlationId": "test-correlation-001",
+  "inputData": {
+    "data": {
+      "message": "Test message for schema-based processor",
+      "value": 42,
+      "items": ["item1", "item2", "item3"]
+    },
+    "metadata": {
+      "source": "test-client",
+      "version": "1.0",
+      "priority": "high"
+    },
+    "timestamp": "2025-06-02T18:30:00.000Z"
+  }
+}

@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>FlowOrchestrator.EntitiesManagers.Application</AssemblyName>
+    <RootNamespace>FlowOrchestrator.EntitiesManagers.Application</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.7.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\FlowOrchestrator.EntitiesManagers.Core\FlowOrchestrator.EntitiesManagers.Core.csproj" />
+  </ItemGroup>
+
+</Project>
