@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MassTransit" Version="8.3.4" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.3.4" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\src\Framework\FlowOrchestrator.BaseProcessor.Application\FlowOrchestrator.BaseProcessor.Application.csproj" />
+    <ProjectReference Include="..\src\Core\FlowOrchestrator.EntitiesManagers.Core\FlowOrchestrator.EntitiesManagers.Core.csproj" />
+  </ItemGroup>
+
+</Project>

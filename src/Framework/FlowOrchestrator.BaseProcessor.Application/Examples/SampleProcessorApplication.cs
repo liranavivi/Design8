@@ -1,4 +1,5 @@
 using FlowOrchestrator.EntitiesManagers.Core.Entities.Base;
+using FlowOrchestrator.EntitiesManagers.Core.Entities;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.Text.Json;
@@ -45,6 +46,19 @@ public class SampleProcessorApplication : BaseProcessorApplication
             "Sample processor processing data. ProcessorId: {ProcessorId}, StepId: {StepId}",
             processorId, stepId);
 
+        // Initialize sample data - will be assigned from DeliveryEntity.Payload if available
+        var sampleData = "This is sample data from the test processor";
+
+        // Process DeliveryEntity if present and get its Payload
+        var deliveryEntities = entities.OfType<DeliveryEntity>().ToList();
+        foreach (var delivery in deliveryEntities)
+        {
+            logger.LogInformation(
+                "Reading DeliveryEntity '{DeliveryName}' payload into sample data",
+                delivery.Name);
+            sampleData = delivery.Payload; // Assign DeliveryEntity.Payload TO sampleData
+        }
+
         // Return processed data
         return new ProcessedActivityData
         {
@@ -55,19 +69,28 @@ public class SampleProcessorApplication : BaseProcessorApplication
                 processorId = processorId.ToString(),
                 orchestratedFlowEntityId = orchestratedFlowEntityId.ToString(),
                 entitiesProcessed = entities.Count,
+                deliveryEntitiesProcessed = deliveryEntities.Count,
                 processingDetails = new
                 {
                     processedAt = DateTime.UtcNow,
                     processingDuration = "100ms",
                     inputDataReceived = true,
                     inputMetadataReceived = inputMetadata.HasValue,
-                    sampleData = "This is sample data from the test processor",
-                    entityTypes = entities.Select(e => e.GetType().Name).Distinct().ToArray()
+                    sampleData = sampleData,
+                    entityTypes = entities.Select(e => e.GetType().Name).Distinct().ToArray(),
+                    deliveryEntities = deliveryEntities.Select(d => new
+                    {
+                        name = d.Name,
+                        version = d.Version,
+                        schemaId = d.SchemaId.ToString(),
+                        payload = d.Payload,
+                        payloadUsedAsSampleData = d.Payload == sampleData
+                    }).ToArray()
                 }
             },
             ProcessorName = "TestProcessor",
             Version = "1.0",
-            ExecutionId  = Guid.NewGuid()//executionId
+            ExecutionId = executionId == Guid.Empty ? Guid.NewGuid() : executionId
         };
     }
 }
